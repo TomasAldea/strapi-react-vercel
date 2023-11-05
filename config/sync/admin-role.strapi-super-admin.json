@@ -381,6 +381,13 @@
       "conditions": []
     },
     {
+      "action": "plugin::seo.read",
+      "actionParameters": {},
+      "subject": null,
+      "properties": {},
+      "conditions": []
+    },
+    {
       "action": "plugin::upload.assets.copy-link",
       "actionParameters": {},
       "subject": null,

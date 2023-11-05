@@ -1,0 +1,10 @@
+{
+    "database": {
+      "type": "postgresql",
+      "host": "ec2-54-73-22-169.eu-west-1.compute.amazonaws.com",
+      "port": 5432,
+      "username": "hqpyoorqrfyxsv",
+      "password": "befd4ae8c3fe94bbd09bfd05eba3aefe8685c9cc45dceb27b410d0f30d6f5800",
+      "database": "d3kun28h6uufso"
+    }
+}

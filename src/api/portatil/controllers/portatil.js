@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * gourmet controller
+ * portatil controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::gourmet.gourmet');
+module.exports = createCoreController('api::portatil.portatil');

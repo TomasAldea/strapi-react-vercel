@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * nuevo router
+ * portatil router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::nuevo.nuevo');
+module.exports = createCoreRouter('api::portatil.portatil');

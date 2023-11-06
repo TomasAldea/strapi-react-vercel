@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * nuevo service
+ * portatil service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::nuevo.nuevo');
+module.exports = createCoreService('api::portatil.portatil');

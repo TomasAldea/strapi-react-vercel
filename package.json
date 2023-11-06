@@ -15,11 +15,10 @@
     "@strapi/plugin-users-permissions": "4.15.0",
     "@strapi/strapi": "4.15.0",
     "better-sqlite3": "8.6.0",
-    "pg": "^8.11.3",
-    "strapi-plugin-config-sync": "^1.2.3"
+    "pg": "^8.11.3"
   },
   "author": {
-    "name": "A Strapi developer"
+    "name": "Tomás Aldea"
   },
   "strapi": {
     "uuid": "08fff376-4cba-446a-b9b6-23f1e7e8a660"

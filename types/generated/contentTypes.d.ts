@@ -368,6 +368,7 @@ export interface ApiPortatilPortatil extends Schema.CollectionType {
     singularName: 'portatil';
     pluralName: 'portatils';
     displayName: 'Portatil';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -377,6 +378,13 @@ export interface ApiPortatilPortatil extends Schema.CollectionType {
     texto: Attribute.RichText;
     imagen: Attribute.Media;
     slug: Attribute.UID<'api::portatil.portatil', 'titulo'>;
+    texto_complejo: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'markdown';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

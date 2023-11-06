@@ -4,7 +4,8 @@
   "info": {
     "singularName": "portatil",
     "pluralName": "portatils",
-    "displayName": "Portatil"
+    "displayName": "Portatil",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -18,18 +19,26 @@
       "type": "richtext"
     },
     "imagen": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "slug": {
       "type": "uid",
       "targetField": "titulo"
+    },
+    "texto_complejo": {
+      "type": "customField",
+      "options": {
+        "preset": "markdown"
+      },
+      "customField": "plugin::ckeditor5.CKEditor"
     }
   }
 }

@@ -36,7 +36,7 @@
     "texto_complejo": {
       "type": "customField",
       "options": {
-        "preset": "markdown"
+        "preset": "toolbar"
       },
       "customField": "plugin::ckeditor5.CKEditor"
     }

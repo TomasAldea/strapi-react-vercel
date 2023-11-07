@@ -382,7 +382,7 @@ export interface ApiPortatilPortatil extends Schema.CollectionType {
       Attribute.CustomField<
         'plugin::ckeditor5.CKEditor',
         {
-          preset: 'markdown';
+          preset: 'toolbar';
         }
       >;
     createdAt: Attribute.DateTime;

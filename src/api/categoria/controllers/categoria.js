@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * portatil controller
+ * categoria controller
  */
 
 const { createCoreController } = require('@strapi/strapi').factories;
 
-module.exports = createCoreController('api::portatil.portatil');
+module.exports = createCoreController('api::categoria.categoria');

@@ -362,40 +362,70 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiPortatilPortatil extends Schema.CollectionType {
-  collectionName: 'portatils';
+export interface ApiCategoriaCategoria extends Schema.CollectionType {
+  collectionName: 'categorias';
   info: {
-    singularName: 'portatil';
-    pluralName: 'portatils';
-    displayName: 'Portatil';
+    singularName: 'categoria';
+    pluralName: 'categorias';
+    displayName: 'categoria';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
+    shortDesc: Attribute.String;
+    imagenDestacada: Attribute.Media;
     titulo: Attribute.String;
-    texto: Attribute.RichText;
-    imagen: Attribute.Media;
-    slug: Attribute.UID<'api::portatil.portatil', 'titulo'>;
-    texto_complejo: Attribute.RichText &
-      Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'toolbar';
-        }
-      >;
+    slug: Attribute.UID<'api::categoria.categoria', 'titulo'>;
+    seo: Attribute.Component<'shared.seo'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::portatil.portatil',
+      'api::categoria.categoria',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::portatil.portatil',
+      'api::categoria.categoria',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRegalosPorEdadRegalosPorEdad extends Schema.CollectionType {
+  collectionName: 'regalos_por_edads';
+  info: {
+    singularName: 'regalos-por-edad';
+    pluralName: 'regalos-por-edads';
+    displayName: 'Regalos por Edad';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    titulo: Attribute.String;
+    slug: Attribute.UID<'api::regalos-por-edad.regalos-por-edad', 'titulo'>;
+    categoria: Attribute.Relation<
+      'api::regalos-por-edad.regalos-por-edad',
+      'oneToOne',
+      'api::categoria.categoria'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::regalos-por-edad.regalos-por-edad',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::regalos-por-edad.regalos-por-edad',
       'oneToOne',
       'admin::user'
     > &
@@ -728,7 +758,8 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::portatil.portatil': ApiPortatilPortatil;
+      'api::categoria.categoria': ApiCategoriaCategoria;
+      'api::regalos-por-edad.regalos-por-edad': ApiRegalosPorEdadRegalosPorEdad;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;

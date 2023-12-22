@@ -35,7 +35,7 @@
     },
     "seo": {
       "type": "component",
-      "repeatable": false,
+      "repeatable": true,
       "component": "shared.seo"
     }
   }

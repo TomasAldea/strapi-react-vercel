@@ -1,10 +1,11 @@
 {
   "kind": "collectionType",
-  "collectionName": "regalos_por_edads",
+  "collectionName": "regalos_por_edad_api",
   "info": {
     "singularName": "regalos-por-edad",
-    "pluralName": "regalos-por-edads",
-    "displayName": "Regalos por Edad"
+    "pluralName": "regalos-por-edad-api",
+    "displayName": "regalos por edad",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,16 +13,33 @@
   "pluginOptions": {},
   "attributes": {
     "titulo": {
-      "type": "string"
+      "type": "string",
+      "required": true
+    },
+    "shortDesc": {
+      "type": "string",
+      "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "titulo"
+      "targetField": "titulo",
+      "required": true
     },
     "categoria": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::categoria.categoria"
+    },
+    "imagenDestacada": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     }
   }
 }

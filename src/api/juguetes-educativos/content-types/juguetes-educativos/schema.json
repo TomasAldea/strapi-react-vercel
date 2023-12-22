@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "juguetes_educativos_api",
+  "info": {
+    "singularName": "juguetes-educativos",
+    "pluralName": "juguetes-educativos-api",
+    "displayName": "Juguetes Educativos"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titulo": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "titulo"
+    },
+    "shortDesc": {
+      "type": "string",
+      "required": true
+    },
+    "imagenDestacada": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "categoria": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::categoria.categoria"
+    }
+  }
+}

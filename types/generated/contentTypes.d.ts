@@ -362,77 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCategoriaCategoria extends Schema.CollectionType {
-  collectionName: 'categorias';
-  info: {
-    singularName: 'categoria';
-    pluralName: 'categorias';
-    displayName: 'categoria';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    shortDesc: Attribute.String;
-    imagenDestacada: Attribute.Media;
-    titulo: Attribute.String;
-    slug: Attribute.UID<'api::categoria.categoria', 'titulo'>;
-    seo: Attribute.Component<'shared.seo'>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::categoria.categoria',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::categoria.categoria',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiRegalosPorEdadRegalosPorEdad extends Schema.CollectionType {
-  collectionName: 'regalos_por_edads';
-  info: {
-    singularName: 'regalos-por-edad';
-    pluralName: 'regalos-por-edads';
-    displayName: 'Regalos por Edad';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    titulo: Attribute.String;
-    slug: Attribute.UID<'api::regalos-por-edad.regalos-por-edad', 'titulo'>;
-    categoria: Attribute.Relation<
-      'api::regalos-por-edad.regalos-por-edad',
-      'oneToOne',
-      'api::categoria.categoria'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::regalos-por-edad.regalos-por-edad',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::regalos-por-edad.regalos-por-edad',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -748,6 +677,123 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoriaCategoria extends Schema.CollectionType {
+  collectionName: 'categorias';
+  info: {
+    singularName: 'categoria';
+    pluralName: 'categorias';
+    displayName: 'categoria';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    shortDesc: Attribute.String;
+    imagenDestacada: Attribute.Media;
+    titulo: Attribute.String;
+    slug: Attribute.UID<'api::categoria.categoria', 'titulo'>;
+    seo: Attribute.Component<'shared.seo', true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::categoria.categoria',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::categoria.categoria',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiJuguetesEducativosJuguetesEducativos
+  extends Schema.CollectionType {
+  collectionName: 'juguetes_educativos_api';
+  info: {
+    singularName: 'juguetes-educativos';
+    pluralName: 'juguetes-educativos-api';
+    displayName: 'Juguetes Educativos';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    titulo: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<
+      'api::juguetes-educativos.juguetes-educativos',
+      'titulo'
+    >;
+    shortDesc: Attribute.String & Attribute.Required;
+    imagenDestacada: Attribute.Media & Attribute.Required;
+    categoria: Attribute.Relation<
+      'api::juguetes-educativos.juguetes-educativos',
+      'oneToOne',
+      'api::categoria.categoria'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::juguetes-educativos.juguetes-educativos',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::juguetes-educativos.juguetes-educativos',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRegalosPorEdadRegalosPorEdad extends Schema.CollectionType {
+  collectionName: 'regalos_por_edad_api';
+  info: {
+    singularName: 'regalos-por-edad';
+    pluralName: 'regalos-por-edad-api';
+    displayName: 'regalos por edad';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    titulo: Attribute.String & Attribute.Required;
+    shortDesc: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::regalos-por-edad.regalos-por-edad', 'titulo'> &
+      Attribute.Required;
+    categoria: Attribute.Relation<
+      'api::regalos-por-edad.regalos-por-edad',
+      'oneToOne',
+      'api::categoria.categoria'
+    >;
+    imagenDestacada: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::regalos-por-edad.regalos-por-edad',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::regalos-por-edad.regalos-por-edad',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -758,14 +804,15 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::categoria.categoria': ApiCategoriaCategoria;
-      'api::regalos-por-edad.regalos-por-edad': ApiRegalosPorEdadRegalosPorEdad;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::categoria.categoria': ApiCategoriaCategoria;
+      'api::juguetes-educativos.juguetes-educativos': ApiJuguetesEducativosJuguetesEducativos;
+      'api::regalos-por-edad.regalos-por-edad': ApiRegalosPorEdadRegalosPorEdad;
     }
   }
 }

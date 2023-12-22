@@ -712,6 +712,44 @@ export interface ApiCategoriaCategoria extends Schema.CollectionType {
   };
 }
 
+export interface ApiJuegosDeCartasJuegosDeCartas extends Schema.CollectionType {
+  collectionName: 'juegos_de_cartas_api';
+  info: {
+    singularName: 'juegos-de-cartas';
+    pluralName: 'juegos-de-cartas-api';
+    displayName: 'juegos de cartas';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    titulo: Attribute.String;
+    shortDesc: Attribute.String;
+    slug: Attribute.UID<'api::juegos-de-cartas.juegos-de-cartas', 'titulo'>;
+    categoria: Attribute.Relation<
+      'api::juegos-de-cartas.juegos-de-cartas',
+      'oneToOne',
+      'api::categoria.categoria'
+    >;
+    imagenDestacada: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::juegos-de-cartas.juegos-de-cartas',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::juegos-de-cartas.juegos-de-cartas',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiJuguetesEducativosJuguetesEducativos
   extends Schema.CollectionType {
   collectionName: 'juguetes_educativos_api';
@@ -811,6 +849,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'api::categoria.categoria': ApiCategoriaCategoria;
+      'api::juegos-de-cartas.juegos-de-cartas': ApiJuegosDeCartasJuegosDeCartas;
       'api::juguetes-educativos.juguetes-educativos': ApiJuguetesEducativosJuguetesEducativos;
       'api::regalos-por-edad.regalos-por-edad': ApiRegalosPorEdadRegalosPorEdad;
     }

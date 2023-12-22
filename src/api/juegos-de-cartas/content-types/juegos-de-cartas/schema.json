@@ -1,0 +1,40 @@
+{
+  "kind": "collectionType",
+  "collectionName": "juegos_de_cartas_api",
+  "info": {
+    "singularName": "juegos-de-cartas",
+    "pluralName": "juegos-de-cartas-api",
+    "displayName": "juegos de cartas"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "titulo": {
+      "type": "string"
+    },
+    "shortDesc": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "titulo"
+    },
+    "categoria": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::categoria.categoria"
+    },
+    "imagenDestacada": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

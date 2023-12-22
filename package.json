@@ -16,7 +16,8 @@
     "@strapi/plugin-users-permissions": "4.15.0",
     "@strapi/strapi": "4.15.0",
     "better-sqlite3": "8.6.0",
-    "pg": "^8.11.3"
+    "pg": "^8.11.3",
+    "strapi-plugin-local-image-sharp": "^1.7.0"
   },
   "author": {
     "name": "Tomás Aldea"

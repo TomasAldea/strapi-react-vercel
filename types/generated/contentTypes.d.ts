@@ -677,6 +677,101 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface PluginEmailDesignerEmailTemplate
+  extends Schema.CollectionType {
+  collectionName: 'email_templates';
+  info: {
+    singularName: 'email-template';
+    pluralName: 'email-templates';
+    displayName: 'Email-template';
+    name: 'email-template';
+  };
+  options: {
+    draftAndPublish: false;
+    timestamps: true;
+    increments: true;
+    comment: '';
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    templateReferenceId: Attribute.Integer & Attribute.Unique;
+    design: Attribute.JSON;
+    name: Attribute.String;
+    subject: Attribute.String;
+    bodyHtml: Attribute.Text;
+    bodyText: Attribute.Text;
+    enabled: Attribute.Boolean & Attribute.DefaultTo<true>;
+    tags: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::email-designer.email-template',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::email-designer.email-template',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginTodoTask extends Schema.CollectionType {
+  collectionName: 'todo_task';
+  info: {
+    tableName: 'task';
+    singularName: 'task';
+    pluralName: 'tasks';
+    displayName: 'Task';
+    description: 'A task in Strapi';
+    kind: 'collectionType';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 40;
+      }>;
+    isDone: Attribute.Boolean & Attribute.DefaultTo<false>;
+    related: Attribute.Relation<'plugin::todo.task', 'morphToOne'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::todo.task',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::todo.task',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiCategoriaCategoria extends Schema.CollectionType {
   collectionName: 'categorias';
   info: {
@@ -688,12 +783,64 @@ export interface ApiCategoriaCategoria extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    shortDesc: Attribute.String;
-    imagenDestacada: Attribute.Media;
-    titulo: Attribute.String;
+    shortDesc: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    imagenDestacada: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    titulo: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     slug: Attribute.UID<'api::categoria.categoria', 'titulo'>;
-    seo: Attribute.Component<'shared.seo', true>;
+    seo: Attribute.Component<'shared.seo', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    mainColor: Attribute.String &
+      Attribute.CustomField<'plugin::color-picker.color'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    menuIcon: Attribute.Text &
+      Attribute.CustomField<'plugin::heroicons-field.icon-picker'> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    richText: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      > &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -709,6 +856,202 @@ export interface ApiCategoriaCategoria extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::categoria.categoria',
+      'oneToMany',
+      'api::categoria.categoria'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiCookieCookie extends Schema.CollectionType {
+  collectionName: 'cookies';
+  info: {
+    singularName: 'cookie';
+    pluralName: 'cookies';
+    displayName: 'Cookies';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+    'content-manager': {
+      visible: false;
+    };
+  };
+  attributes: {
+    category: Attribute.Relation<
+      'api::cookie.cookie',
+      'manyToOne',
+      'api::cookie-category.cookie-category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::cookie.cookie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::cookie.cookie',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::cookie.cookie',
+      'oneToMany',
+      'api::cookie.cookie'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiCookieCategoryCookieCategory extends Schema.CollectionType {
+  collectionName: 'cookie_categories';
+  info: {
+    singularName: 'cookie-category';
+    pluralName: 'cookie-categories';
+    displayName: 'Cookie Categories';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+    'content-manager': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    isNecessary: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }> &
+      Attribute.DefaultTo<false>;
+    key: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    cookies: Attribute.Relation<
+      'api::cookie-category.cookie-category',
+      'oneToMany',
+      'api::cookie.cookie'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::cookie-category.cookie-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::cookie-category.cookie-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::cookie-category.cookie-category',
+      'oneToMany',
+      'api::cookie-category.cookie-category'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiCookiePopupCookiePopup extends Schema.CollectionType {
+  collectionName: 'cookie_popups';
+  info: {
+    singularName: 'cookie-popup';
+    pluralName: 'cookie-popups';
+    displayName: 'Cookie Popups';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+    'content-manager': {
+      visible: false;
+    };
+  };
+  attributes: {
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    buttons: Attribute.Component<'shared.cookie-button', true> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    hasCustomizability: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::cookie-popup.cookie-popup',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::cookie-popup.cookie-popup',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::cookie-popup.cookie-popup',
+      'oneToMany',
+      'api::cookie-popup.cookie-popup'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -848,7 +1191,12 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'plugin::email-designer.email-template': PluginEmailDesignerEmailTemplate;
+      'plugin::todo.task': PluginTodoTask;
       'api::categoria.categoria': ApiCategoriaCategoria;
+      'api::cookie.cookie': ApiCookieCookie;
+      'api::cookie-category.cookie-category': ApiCookieCategoryCookieCategory;
+      'api::cookie-popup.cookie-popup': ApiCookiePopupCookiePopup;
       'api::juegos-de-cartas.juegos-de-cartas': ApiJuegosDeCartasJuegosDeCartas;
       'api::juguetes-educativos.juguetes-educativos': ApiJuguetesEducativosJuguetesEducativos;
       'api::regalos-por-edad.regalos-por-edad': ApiRegalosPorEdadRegalosPorEdad;
